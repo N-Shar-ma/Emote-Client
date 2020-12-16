@@ -1,0 +1,239 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+html {
+    --primary-color-hue: 10;
+    /* --primary-color: hsl(var(--primary-color-hue), 100%, 60%); */
+    --primary-color-light: hsl(var(--primary-color-hue), 100%, 80%);
+    --primary-color-lighter: hsl(var(--primary-color-hue), 100%, 85%);
+    --primary-color-dark: hsl(var(--primary-color-hue), 100%, 70%);
+    /* --primary-color-darker: hsl(var(--primary-color-hue), 100%, 40%); */
+    --secondary-color: hsl(20, 100%, 30%);
+    height: 100%;
+    font-family: sans-serif;
+    color: inherit;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    color: var(--secondary-color);
+    background-color: var(--secondary-color);
+}
+
+header {
+    /* text-align: center; */
+    background-color: var(--primary-color-dark);
+}
+
+h1, h3 {
+    margin: 0.5rem;
+    text-align: center;
+}
+
+#tagline {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0.2rem;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    overflow-y: auto;
+}
+
+.main-section, aside {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 0;
+    overflow-y: auto;
+    border-radius: 15px;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    margin: 1vw;
+}
+
+.main-section {
+    flex-grow: 4;
+    margin-left: 0.5vw;
+}
+
+aside {
+    margin-right: 0.5vw;
+    flex-grow: 1;
+    color: var(--primary-color-dark);
+}
+
+#message-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.message {
+    min-width: 15vw;
+    max-width: 45vw;
+    border-radius: 1rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    animation: pop-up 300ms ease-in-out;
+}
+
+.chat-from-other {
+    align-self: flex-start;
+    background-color:var(--primary-color-lighter);
+    border-bottom-left-radius: 0px;
+    transform-origin: left bottom;
+}
+
+.chat-sender-name {
+    font-weight: bolder;
+    font-size: 1.15rem;
+    position: relative;
+    /* border-bottom: 5px solid var(--secondary-color); */
+}
+
+.chat-sender-name::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    left: 0px;
+    right: 0px;
+    bottom: -3px;
+    border-radius: 3px;
+    background-color: var(--secondary-color);
+}
+
+.time-sent {
+    font-size: 0.75rem;
+    text-align: right;
+}
+
+.chat-from-self {
+    align-self: flex-end;
+    background-color: var(--primary-color-light);
+    border-bottom-right-radius: 0px;
+    transform-origin: right bottom;
+}
+
+.chat-message {
+    padding: 0.6rem 0;
+}
+
+.chat-from-self .chat-message {
+    padding-top: 0;
+}
+
+@keyframes pop-up {
+    0% {
+        transform: scale(0);
+    }
+    80% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.notification {
+    align-self: center;
+    text-align: center;
+    background-color: var(--primary-color-dark);
+}
+
+#message-form {
+    display: flex;
+}
+
+#emoji-chat-input, #emoji-name-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 0.3rem;
+    border-radius: 0;
+}
+
+#message-form button {
+    background-color: var(--primary-color-dark);
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    border-radius: 0;
+    padding: 0.1rem 0.8rem;
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out;
+}
+
+#message-form button:hover {
+    background-color: hsla(var(--primary-color-hue), 100%, 50%, 0.8);
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color-light);
+    border-radius: 5px;
+}
+
+#overlay {
+    background-color: hsla(0, 0%, 0%, 0.5);
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+#modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-width: 80vw;
+    padding: 0.5rem;
+    border-radius: 15px;
+    background-color: var(--primary-color-dark);
+    display: flex;
+    flex-direction: column;
+}
+
+#modal * {
+    margin: 0.5rem;
+    text-align: center;
+}
+
+#modal label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    aside {
+        display: none;
+    }
+    .message {
+        min-width: 30vw;
+        max-width: 55vw;        
+    }
+    .notification {
+        max-width: 70vw;
+    }
+}

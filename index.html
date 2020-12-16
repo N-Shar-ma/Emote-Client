@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/209/speech-balloon_1f4ac.png" >
+    <link rel="stylesheet" href="styles.css" ></link>
+    <script defer src="https://emote-server.herokuapp.com/socket.io/socket.io.js"></script>
+    <script defer src="script.js" ></script>
+    <title>Emote</title>
+</head>
+<body>
+    <header>
+        <h1>Emote💬</h1>
+        <div id="tagline">Open Anonymous Emoji-Only Chat Room</div>
+    </header>
+    <main>
+        <aside>
+            <h3>Currently online:</h3>
+            <ul id="users-list"></ul>
+        </aside>
+        <section class="main-section">
+            <section id="message-container"></section>
+            <form id="message-form">
+                <input type="text" id="emoji-chat-input" placeholder="Express yourself with emojis" autocomplete="off"></input>
+                <button type="submit" >💬</button>
+            </form>
+        </section>
+    </main>
+    <div id="overlay"></div>
+    <form id="modal">
+        <label>Choose an emoji-only nickname for yourself</label>
+        <input type="text" id="emoji-name-input">
+    </form>
+    <template id="chat-from-other-template">
+        <div class="message chat-from-other">
+            <div class="chat-sender-name"></div>
+            <div class="chat-message"></div>
+            <div class="time-sent"></div>
+        </div>
+    </template>
+    <template id="chat-from-self-template">
+        <div class="message chat-from-self">
+            <div class="chat-message"></div>
+            <div class="time-sent"></div>
+        </div>
+    </template>
+    <template id="notification-template">
+        <div class="message notification"></div>
+    </template>
+</body>
+</html>
