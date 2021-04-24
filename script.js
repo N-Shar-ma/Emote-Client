@@ -93,8 +93,7 @@ function messageSelf() {
 }
 
 socket.on("conversation-prompt", msg => {
-    const messageHtml = `💡 Conversation Prompt 💡 <div style="font-weight: bold"># ${msg}</div>`
-    addMessage(createNotificationMessage(messageHtml, true))
+    addMessage(createNotificationMessage(msg, true))
 })
 
 socket.on("receive-message", data => {
@@ -127,9 +126,16 @@ function addMessage(msgElem) {
     messageContainer.scrollTop = messageContainer.scrollHeight
 }
 
-function createNotificationMessage(msg) {
+function createNotificationMessage(msg, conversationPrompt=false) {
     const notification = notificationTemplate.content.cloneNode(true)
-    notification.querySelector(".notification").innerHTML = msg
+    if(conversationPrompt) {
+        notification.querySelector(".notification").append("💡 Conversation Prompt 💡")
+        const styledDiv = document.createElement("div");
+        styledDiv.style.fontWeight = "bold"
+        styledDiv.innerText = `# ${msg}`
+        notification.querySelector(".notification").append(styledDiv)
+    }
+    else notification.querySelector(".notification").innerText = msg
     return notification
 }
 
